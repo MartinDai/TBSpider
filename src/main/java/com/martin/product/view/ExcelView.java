@@ -20,12 +20,14 @@ public class ExcelView extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
                                            HttpServletResponse response) throws Exception {
-        OutputStream os = response.getOutputStream();
-        response.setCharacterEncoding("utf-8");
         Object fileName = model.get("fileName");
         if (fileName == null) {
             fileName = "download";
         }
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".xls");
+        OutputStream os = response.getOutputStream();
         if (inputStream != null) {
             try {
                 byte[] b = new byte[1024];
@@ -34,10 +36,7 @@ public class ExcelView extends AbstractView {
                     os.write(b, 0, length);
                 }
                 os.flush();
-                //
-                response.setContentType("application/octet-stream");
 
-                response.setHeader("Content-Disposition", "attachment; filename=" + fileName + ".xls");
             } catch (Exception ignored) {
             } finally {
                 inputStream.close();
