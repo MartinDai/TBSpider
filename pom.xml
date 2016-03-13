@@ -156,7 +156,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>spider</finalName>
+        <finalName>tbspider</finalName>
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
