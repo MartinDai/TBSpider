@@ -61,7 +61,7 @@
         }
     });
 
-    function initProgress(data) {
+    function initProgress(event, data) {
         var response = data.response;
         progressInterval = window.setInterval("updateProgress(" + response.key + ")", 1000);
         $("#total").text(0);

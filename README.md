@@ -4,7 +4,7 @@
 ## 框架和技术
 
 - Java：jdk1.7
-- 后端框架：SpringMVC3.2.9 Spring3.2.9
+- 后端框架：SpringMVC4.3.17 Spring4.3.17
 - 前端框架：bootstrap3.3.5 bootstrap-fileinput4.3.1
 - Web容器：Jetty 6.1.26
 - 构建工具：Maven

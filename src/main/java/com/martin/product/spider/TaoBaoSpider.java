@@ -2,6 +2,7 @@ package com.martin.product.spider;
 
 import com.martin.product.http.HttpUtils;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -15,13 +16,12 @@ public class TaoBaoSpider {
      */
     public static boolean checkItemIsOnSale(String url) {
         Document document = HttpUtils.buildHtmlDocument(url);
-        Elements orderElements = document.getElementsByClass("unit-detail-order-action");
-        return !orderElements.isEmpty();
+        Element element = document.getElementById("J_LinkBuy");
+        return element!= null;
     }
 
     public static void main(String[] args) {
-//        String url = "http://detail.1688.com/offer/520887449688.html?spm=a2615.7691456.0.0.NdFJ60";
-        String url = "https://detail.1688.com/offer/38543019067.html?spm=a2615.7691456.0.0.DxOiLN";
+        String url = "https://detail.tmall.com/item.htm?spm=a230r.1.14.13.514e2499vNWsK9&id=561872607703&cm_id=140105335569ed55e27b&abbucket=7";
         System.out.println(checkItemIsOnSale(url));
     }
 
