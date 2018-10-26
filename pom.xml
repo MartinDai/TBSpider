@@ -45,7 +45,7 @@
             <scope>provided</scope>
         </dependency>
         <!-- spring核心包 -->
-        <!-- springframe start -->
+        <!-- springframework start -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -118,7 +118,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.6</version>
+            <version>1.2.31</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>

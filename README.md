@@ -8,7 +8,7 @@
 - 前端框架：bootstrap3.3.5 bootstrap-fileinput4.3.1
 - Web容器：Jetty 6.1.26
 - 构建工具：Maven
-- 其他：Jsoup1.8.3 fastjson1.2.6
+- 其他：Jsoup1.8.3 fastjson1.2.31
 
 ## 功能
 - 对上传的淘宝链接excel进行分析商品状态,并提供分析后未下架商品链接excel下载
