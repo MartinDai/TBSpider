@@ -17,6 +17,8 @@
         <jetty.version>9.2.10.v20150310</jetty.version>
         <!-- spring版本号 -->
         <spring.version>4.3.18.RELEASE</spring.version>
+        <!-- poi版本号 -->
+        <poi.version>3.17</poi.version>
     </properties>
 
     <repositories>
@@ -141,12 +143,12 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.10.1</version>
+            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.10.1</version>
+            <version>${poi.version}</version>
         </dependency>
     </dependencies>
     <build>
