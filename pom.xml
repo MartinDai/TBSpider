@@ -16,7 +16,7 @@
         <!-- Jetty版本号 -->
         <jetty.version>9.2.10.v20150310</jetty.version>
         <!-- spring版本号 -->
-        <spring.version>4.3.18.RELEASE</spring.version>
+        <spring.version>5.3.3</spring.version>
         <!-- poi版本号 -->
         <poi.version>3.17</poi.version>
     </properties>
