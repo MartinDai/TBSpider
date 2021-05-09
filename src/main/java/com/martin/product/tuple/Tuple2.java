@@ -3,12 +3,12 @@ package com.martin.product.tuple;
 /**
  * 包含两个元素的元组
  */
-public class Tuple2Unit<P1, P2> {
+public class Tuple2<P1, P2> {
 
     private P1 p1;
     private P2 p2;
 
-    public Tuple2Unit(P1 p1, P2 p2) {
+    public Tuple2(P1 p1, P2 p2) {
         this.p1 = p1;
         this.p2 = p2;
     }
@@ -31,7 +31,7 @@ public class Tuple2Unit<P1, P2> {
 
     @Override
     public String toString() {
-        return "Tuple2Unit{" +
+        return "Tuple2{" +
                 "p1=" + p1 +
                 ", p2=" + p2 +
                 '}';

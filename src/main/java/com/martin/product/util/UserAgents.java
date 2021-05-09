@@ -1,4 +1,4 @@
-package com.martin.product.http;
+package com.martin.product.util;
 
 import org.springframework.core.io.ClassPathResource;
 

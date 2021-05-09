@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.1/css/fileinput.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.3.1/css/fileinput.min.css" rel="stylesheet">
     <title>淘宝网链接分析</title>
     <style>
         * {
@@ -27,20 +27,20 @@
 <body>
 <div id="main-container">
     <h1>淘宝网链接分析</h1>
-    <input type="file" class="file" id="fileInput" name="urls">
+    <input type="file" class="file" id="fileInput" name="file">
     <div id="progress-container" class="progress hidden">
         <div id="progress-bar" class="progress-bar" role="progressbar" style="min-width: 2em;">
-            <i id="precent">0</i>
+            <i id="percent">0</i>
             %
         </div>
     </div>
     <button id="download-btn" class="btn btn-primary hidden">下载分析结果</button>
 </div>
 </body>
-<script src="http://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.1/js/fileinput.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.1/js/fileinput_locale_zh.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.1/js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.1/js/fileinput_locale_zh.min.js"></script>
 <script>
     var progressInterval;
     $('#fileInput').fileinput({
@@ -63,7 +63,7 @@
 
     function initProgress(event, data) {
         var response = data.response;
-        progressInterval = window.setInterval("updateProgress(" + response.key + ")", 1000);
+        progressInterval = window.setInterval("updateProgress(" + response.data.key + ")", 1000);
         $("#total").text(0);
         $("#current").text(0);
         $("#progress").attr("aria-valuenow", 0);
@@ -74,16 +74,16 @@
     function updateProgress(key) {
         $.ajax({
             url: '/getProgress/' + key,
-            success: function (data) {
-                if (data.status == 'OK') {
+            success: function (response) {
+                if (response.data.status == 'OK') {
                     clearInterval(progressInterval);
                     $("#download-btn").removeClass("hidden");
                     $("#download-btn").click(function () {
                         window.open("/download/" + key);
                     });
                 } else {
-                    $("#progress-bar").css("width", data.precent + "%");
-                    $("#precent").text(data.precent);
+                    $("#progress-bar").css("width", response.data.percent + "%");
+                    $("#percent").text(response.data.percent);
                 }
             }
         })

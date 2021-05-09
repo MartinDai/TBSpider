@@ -1,7 +1,6 @@
-package com.martin.product.http;
+package com.martin.product.util;
 
-import com.martin.product.html.HtmlUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,7 +10,7 @@ import java.io.IOException;
 /**
  * http访问工具类
  */
-public class HttpUtils {
+public class HttpUtil {
 
     /**
      * 根据url构建html页面
@@ -153,7 +152,7 @@ public class HttpUtils {
         }
 
         if (StringUtils.isEmpty(host)) {
-            host = HtmlUtils.getServerHost(url);
+            host = HtmlUtil.getServerHost(url);
         }
         if (StringUtils.isNotEmpty(host)) {
             connection.header("Host", host);
@@ -281,7 +280,7 @@ public class HttpUtils {
     public static byte[] buildGetBytes(boolean isUseProxy, String url, String cookie) {
         try {
             Connection connection = createGetStringConnection(isUseProxy, url, cookie, UserAgents.getRandomUserAgent(), null,
-                    HtmlUtils.getServerHost(url));
+                    HtmlUtil.getServerHost(url));
             Connection.Response response = executeConnection(connection);
             if (response != null) {
                 return response.bodyAsBytes();
@@ -337,7 +336,7 @@ public class HttpUtils {
      */
     public static String buildGetString(boolean isUseProxy, String url, String cookie, String UA, String referer) {
         try {
-            Connection connection = createGetStringConnection(isUseProxy, url, cookie, UA, referer, HtmlUtils.getServerHost(url));
+            Connection connection = createGetStringConnection(isUseProxy, url, cookie, UA, referer, HtmlUtil.getServerHost(url));
             Connection.Response response = executeConnection(connection);
             if (response != null) {
                 return response.body();
@@ -387,7 +386,7 @@ public class HttpUtils {
     public static String buildPostString(boolean isUseProxy, String url, String cookie, String... postData) {
         try {
             Connection connection = createPostStringConnection(isUseProxy, url, cookie, UserAgents.getRandomUserAgent(), null,
-                    HtmlUtils.getServerHost(url), postData);
+                    HtmlUtil.getServerHost(url), postData);
             Connection.Response response = executeConnection(connection);
             if (response != null) {
                 return response.body();

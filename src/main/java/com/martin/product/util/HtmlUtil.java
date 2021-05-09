@@ -1,4 +1,4 @@
-package com.martin.product.html;
+package com.martin.product.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * html字符串操作工具类
  */
-public class HtmlUtils {
+public class HtmlUtil {
 
     /**
      * 提取一段字符串s中的js变量,如果s中有多个同名变量，返回第一个

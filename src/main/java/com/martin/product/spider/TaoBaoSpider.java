@@ -1,9 +1,8 @@
 package com.martin.product.spider;
 
-import com.martin.product.http.HttpUtils;
+import com.martin.product.util.HttpUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  * 淘宝爬虫
@@ -15,7 +14,7 @@ public class TaoBaoSpider {
      * 检查宝贝是否在售
      */
     public static boolean checkItemIsOnSale(String url) {
-        Document document = HttpUtils.buildHtmlDocument(url);
+        Document document = HttpUtil.buildHtmlDocument(url);
         Element element = document.getElementById("J_LinkBuy");
         return element!= null;
     }
