@@ -5,21 +5,24 @@ import com.martin.product.response.BaseResponse;
 import com.martin.product.spider.TaoBaoSpider;
 import com.martin.product.tuple.Tuple2;
 import com.martin.product.util.FileUtil;
-import com.martin.product.view.ExcelView;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Map;
 
 @RestController
 public class IndexController {
+
+    private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     private static final Map<String, Tuple2<Integer, Integer>> PROCESS_MAP = Maps.newHashMap();
 
@@ -31,7 +34,7 @@ public class IndexController {
         Assert.notNull(file, "请上传要分析的文件");
         String fileName = file.getOriginalFilename();
         String fileSuffix = fileName.substring(fileName.lastIndexOf("."));
-        if (!fileSuffix.equals(".xls") && !fileSuffix.equals(".xlsx")) {
+        if (!".xls".equals(fileSuffix) && !".xlsx".equals(fileSuffix)) {
             throw new IllegalArgumentException("不支持的文件格式");
         }
 
@@ -64,18 +67,23 @@ public class IndexController {
      * 下载分析结果
      */
     @GetMapping(value = "/download/{fileKey}")
-    public ModelAndView download(@PathVariable("fileKey") String fileKey, Map<String, Object> model) {
+    public void download(@PathVariable("fileKey") String fileKey, HttpServletResponse response) throws IOException {
         String path = FileUtil.getResultPath();
         File file = new File(path + File.separator + fileKey + ".xls");
-        if (file.exists()) {
-            try {
-                InputStream returnStream = new FileInputStream(file);
-                model.put("fileName", fileKey);
-                return new ModelAndView(new ExcelView(returnStream));
-            } catch (FileNotFoundException ignored) {
+        Assert.isTrue(file.exists(), "文件不存在");
+
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+             BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream())) {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment;filename=" + fileKey + ".xls");
+            byte[] b = new byte[1024];
+            int length;
+            while ((length = bis.read(b)) > 0) {
+                bos.write(b, 0, length);
             }
+            bos.flush();
         }
-        throw new IllegalArgumentException("文件不存在");
     }
 
     private static void analyzeExcel(String fileName, String suffix) {
@@ -127,6 +135,7 @@ public class IndexController {
                 }
             }
         } catch (Exception e) {
+            logger.error("分析Excel异常", e);
             return;
         } finally {
             PROCESS_MAP.remove(fileName);

@@ -15,14 +15,14 @@ public class FileUtil {
      * 获取临时文件夹目录
      */
     public static String getTmpPath() {
-        return WebConstants.ROOT_PATH + File.separator + "tmp";
+        return WebConstants.ROOT_PATH + "tmp";
     }
 
     /**
      * 获取结果目录
      */
     public static String getResultPath() {
-        return WebConstants.ROOT_PATH + File.separator + "excel";
+        return WebConstants.ROOT_PATH + "excel";
     }
 
     public static void saveTempFile(MultipartFile file, String targetFileName) {

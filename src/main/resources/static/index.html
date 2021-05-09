@@ -68,6 +68,7 @@
         $("#current").text(0);
         $("#progress").attr("aria-valuenow", 0);
         $("#progress-container").removeClass("hidden");
+        $("#download-btn").addClass("hidden");
         $('#fileInput').fileinput('disable');
     }
 
@@ -78,6 +79,7 @@
                 if (response.data.status == 'OK') {
                     clearInterval(progressInterval);
                     $("#download-btn").removeClass("hidden");
+                    $("#progress-container").addClass("hidden");
                     $("#download-btn").click(function () {
                         window.open("/download/" + key);
                     });
