@@ -1,6 +1,5 @@
 # IntelliJ project files
 .idea
-target
-out
-gen
 
+# Compiled class files
+target/
